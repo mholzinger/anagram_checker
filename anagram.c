@@ -8,65 +8,46 @@ int is_anagram(char* a, char* b);
 int charscan(char needle, char* haystack);
 
 /*----------------------------------------------------------------------------*/
-int main() {
+int main(){
+  char* string1 = "race";
+  char* string2 = "care";
 
-    char* string1 = "race";
-    char* string2 = "care";
-    int ret;
+  (void)printf("Are strings <%s>, <%s>, anagrams? : %s\n", string1, string2,
+    is_anagram(string1, string2) ? "False" : "True");
 
-    ret = is_anagram(string1, string2);
-
-    printf("Are strings <%s>, <%s>, anagrams? : %s\n",
-     string1, string2, ret ? "False" : "True");
-
-    return 0;
+  return 0;
 }
 
 /*----------------------------------------------------------------------------*/
-int is_anagram(char* a, char* b)
-{
-   int len1;
-   int idx;
-   char* chr;
+int is_anagram(char* a, char* b){
+  int idx;
 
-   //  (void)printf("F: is_anagram\n");
-   if ((int)strlen(a) != (int)(strlen(b)))
-   {
-       return False;
-   }
+  // Test if our string lengths match, if they don't match then we don't
+  // have an anagram
+  if ((int)strlen(a) != (int)(strlen(b))){ return False; }
 
-   len1 = strlen(a);
-   idx = 0;
-   while (idx < len1)
-   {
-      //(void)printf("Scanning <%c>\n", a[idx]);
-      if (charscan(a[idx], a) != charscan(a[idx], b))
-        return False;
-
-      idx++;
-   }
-   return True;
+  idx = 0;
+  while (idx < strlen(a))
+  {
+    if (charscan(a[idx], a) != charscan(a[idx], b)){ return False; }
+    idx++;
+  }
+  return True;
 }
 
 /*----------------------------------------------------------------------------*/
-int charscan(char needle, char* haystack)
-{
-
+int charscan(char needle, char* haystack){
   int idx = 0;
   int counter = 0;
 
-//  (void)printf("F: Charscan\n");
-
   while (idx < strlen(haystack))
   {
-    if (needle == haystack[idx])
-    {
-      counter += 1;
-
-    }
+    if (needle == haystack[idx]){ counter += 1; }
     idx++;
   };
-//  (void)printf("character <%c> appears <%d> times in string <%s>\n",
-//    needle, counter, haystack);
+/*
+  (void)printf("character <%c> appears <%d> times in string <%s>\n",
+    needle, counter, haystack);
+*/
   return counter;
-}
+};
